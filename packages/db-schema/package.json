@@ -1,5 +1,20 @@
 {
-  "name": "@sdc/db-schema",
+  "name": "db-schema",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config=drizzle.config.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.45.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.4",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3"
+  }
 }

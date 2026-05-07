@@ -1,5 +1,17 @@
 {
-  "name": "@sdc/mock-data",
+  "name": "mock-data",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed": "tsx seed.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3"
+  }
 }

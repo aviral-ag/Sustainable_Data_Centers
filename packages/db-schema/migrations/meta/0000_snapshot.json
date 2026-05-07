@@ -1,0 +1,591 @@
+{
+  "id": "699dc8e0-6ef6-4f69-8f5d-a37ddd76670e",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.balancing_authorities": {
+      "name": "balancing_authorities",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(180)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "region": {
+          "name": "region",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "carbon_intensity": {
+          "name": "carbon_intensity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "renewable_share_pct": {
+          "name": "renewable_share_pct",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "geom_wkt": {
+          "name": "geom_wkt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "balancing_authorities_code_unique": {
+          "name": "balancing_authorities_code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "code"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.data_centers": {
+      "name": "data_centers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "operator": {
+          "name": "operator",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location_city": {
+          "name": "location_city",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location_state": {
+          "name": "location_state",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "region_code": {
+          "name": "region_code",
+          "type": "varchar(80)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(10, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(10, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "capacity_mw": {
+          "name": "capacity_mw",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pue": {
+          "name": "pue",
+          "type": "numeric(3, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "wue": {
+          "name": "wue",
+          "type": "numeric(4, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "balancing_authority_code": {
+          "name": "balancing_authority_code",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'operational'"
+        },
+        "point_wkt": {
+          "name": "point_wkt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dc_pipeline": {
+      "name": "dc_pipeline",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "project_name": {
+          "name": "project_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "operator": {
+          "name": "operator",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location_city": {
+          "name": "location_city",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location_state": {
+          "name": "location_state",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "planned_capacity_mw": {
+          "name": "planned_capacity_mw",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expected_completion_date": {
+          "name": "expected_completion_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phase": {
+          "name": "phase",
+          "type": "varchar(48)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(10, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(10, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "point_wkt": {
+          "name": "point_wkt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.etl_runs": {
+      "name": "etl_runs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pipeline_name": {
+          "name": "pipeline_name",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "finished_at": {
+          "name": "finished_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rows_processed": {
+          "name": "rows_processed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "details": {
+          "name": "details",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.forecasts_cache": {
+      "name": "forecasts_cache",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "cache_key": {
+          "name": "cache_key",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "forecast_type": {
+          "name": "forecast_type",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "horizon_days": {
+          "name": "horizon_days",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "generated_at": {
+          "name": "generated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payload": {
+          "name": "payload",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "forecasts_cache_cache_key_unique": {
+          "name": "forecasts_cache_cache_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "cache_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.research_papers": {
+      "name": "research_papers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "authors": {
+          "name": "authors",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "publication_year": {
+          "name": "publication_year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "journal": {
+          "name": "journal",
+          "type": "varchar(180)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "doi": {
+          "name": "doi",
+          "type": "varchar(180)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "abstract": {
+          "name": "abstract",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "citation_count": {
+          "name": "citation_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keywords": {
+          "name": "keywords",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "research_papers_doi_unique": {
+          "name": "research_papers_doi_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "doi"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.water_stress_regions": {
+      "name": "water_stress_regions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "region_name": {
+          "name": "region_name",
+          "type": "varchar(180)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "region_code": {
+          "name": "region_code",
+          "type": "varchar(80)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stress_score": {
+          "name": "stress_score",
+          "type": "numeric(3, 1)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stress_level": {
+          "name": "stress_level",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "geom_wkt": {
+          "name": "geom_wkt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "centroid_lat": {
+          "name": "centroid_lat",
+          "type": "numeric(10, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "centroid_lng": {
+          "name": "centroid_lng",
+          "type": "numeric(10, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "water_stress_regions_region_name_unique": {
+          "name": "water_stress_regions_region_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "region_name"
+          ]
+        },
+        "water_stress_regions_region_code_unique": {
+          "name": "water_stress_regions_region_code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "region_code"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

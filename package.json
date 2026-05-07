@@ -7,6 +7,9 @@
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
     "lint": "pnpm --filter web lint",
-    "typecheck": "pnpm --filter web tsc --noEmit"
+    "typecheck": "pnpm --filter web tsc --noEmit",
+    "db:generate": "pnpm --filter db-schema db:generate",
+    "db:migrate": "pnpm --filter db-schema db:migrate",
+    "db:seed": "pnpm --filter mock-data seed"
   }
 }
