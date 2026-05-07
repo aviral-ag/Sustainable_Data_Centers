@@ -4,6 +4,8 @@ node_modules/
 out/
 build/
 dist/
+.turbo/
+coverage/
 
 # Environment variables
 .env
@@ -16,8 +18,13 @@ dist/
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .venv/
 venv/
+.python-version
+.tox/
+.nox/
 
 # OS files
 .DS_Store
