@@ -1,0 +1,41 @@
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS files
+.DS_Store
+
+# Railway volume mount (raw data cache - never commit)
+/data/
+
+# Misc Python cache / tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# (Optional) Vercel/Next build cache
+.vercel/
+
